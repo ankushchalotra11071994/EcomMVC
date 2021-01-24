@@ -1,0 +1,21 @@
+﻿@model Ecom.Entities.Category
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<form method="post">
+    <label> Name</label>
+
+    <input name="categoryId" type="hidden" value="@Model.categoryId" />
+    <input name="Name" value="@Model.Name" />
+    <label> Description</label>
+    <input name="Description" value="@Model.Description" />
+    <button class="success" type="submit">SUBMIT</button>
+</form>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

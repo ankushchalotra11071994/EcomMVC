@@ -11,31 +11,27 @@
     <h1>There is no data in the List</h1>
 }
 <table id="Tabelid" class="table table-bordered table-responsive table-hover table-striped " style="border-spacing:20px 30px">
-    <thead>
-        <tr>
-            <td>Name</td>
-            <td>Description</td>
-            <td>ThumbnailUrl</td>
-            <td>Status</td>
+       <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>ThumbnailUrl</th>
+            <th>Status</th>
         </tr>
-    </thead>
-    <tbody>
+     @foreach (var item in Model)
+        {
+         <tr>
+    <td>@item.Name</td>
+    <td>@item.Description</td>
+    <td>@item.Thumbnail</td>
+    <td>
+        (@Html.ActionLink("Edit", "Edit", new { id = item.categoryId }) |
+        @Html.ActionLink("Details", "Details", new { id = item.categoryId }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.categoryId }, new { onclick = "return confirm('Are sure wants to delete?');" }))
+    </td>
+</tr>
+         }
 
-        <tr>
-
-            @foreach (var item in Model)
-            {
-                <td>@item.Name</td>
-                <td>@item.Description</td>
-                <td>@item.Thumbnail</td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.categoryId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.categoryId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.categoryId }, new { onclick = "return confirm('Are sure wants to delete?');" }))
-                </td>
-            }
-        </tr>
-    </tbody>
+   
 
 </table>
 

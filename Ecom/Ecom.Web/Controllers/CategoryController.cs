@@ -27,7 +27,7 @@ namespace Ecom.Web.Controllers
         [HttpPost] 
         public ActionResult Create( Category category)
         {
-            services.addcategory(category);
+            services.addcategory(category); 
             return RedirectToAction("Index");
         }
         [HttpGet]
@@ -48,7 +48,7 @@ namespace Ecom.Web.Controllers
         public ActionResult Delete(int id)
         {
 
-            services.Deletebyid(id);
+            services.DeleteProductid(id);
              return RedirectToAction("Index");
         }
     }

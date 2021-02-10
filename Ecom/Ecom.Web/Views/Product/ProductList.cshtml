@@ -1,0 +1,151 @@
+﻿@model IEnumerable<Ecom.Entities.Product>
+
+@{
+    ViewBag.Title = "ProductList";
+}
+<form class="form-control form">
+    <input type="text" id="Searchtxt" class="header-search-field" />
+    <button type="button" id="Btntxt"> Search</button>
+ </form>
+<p>
+    <button type="button" id="Createbtn"> Create Product</button>
+</p>
+<script>
+    function DeleteFunction(elem) {
+        var dataId = $(elem).data("id");
+        $.ajax({
+            method: "Post",
+            url: '/Product/Delete',
+            data: {
+                Id: dataId
+            }
+
+        }).done(function (Responce) {
+
+            $("#tablecont").html(Responce);
+        })
+            .fail(function (XMLHttprequest, teststatus, errorThrown) {
+                alert('Fail');
+            })
+
+    }
+    function editfunction(elem) {   
+        var dataId = $(elem).data("id");
+        
+        $.ajax({
+            method: "Get",
+            url: '/Product/Edit',
+            data: {
+                Id: dataId
+            }
+
+        }).done(function (Responce) {
+            
+            $("#Createcontainer").html(Responce);
+        })
+            .fail(function (XMLHttprequest, teststatus, errorThrown) {
+                alert('Fail');
+            })
+    }
+     $("#Createbtn").click(function () {
+        
+        $.ajax({
+            method: "Get",
+            url: '/Product/Create',
+            
+        }).done(function (Responce) {
+
+            $("#Createcontainer").html(Responce);
+        })
+            .fail(function (XMLHttprequest, teststatus, errorThrown) {
+                alert('Fail');
+            })
+    })
+
+    $("#Btntxt").click(function () {
+        var cont = $("#Searchtxt").val();
+        $.ajax({
+            method: "Post",
+            url: '/Product/ProductList',
+            data: { search: cont }
+        }).done(function (Responce) {
+
+            $("#tablecont").html(Responce);
+        })
+            .fail(function (XMLHttprequest, teststatus, errorThrown) {
+                alert('Fail');
+            })
+    })
+    function Createfunction() {
+         $.ajax({
+            method: "Post",
+            url: '/Product/Create',
+            data: $("#Createform").serialize()
+        }).done(function (Responce) {
+
+            $("#tablecont").html(Responce);
+        })
+            .fail(function (XMLHttprequest, teststatus, errorThrown) {
+                alert('Fail');
+            })
+    }
+
+    
+</script>
+<div id="Tablecontainer">
+    <table class="table" style="text-transform">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.thumbnailid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Categoryid)
+            </th>
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductId)
+                </td> <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.thumbnailid)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Categoryid)
+                </td>
+
+                <td>
+                     <button class="Editbtn" data-id="@item.ProductId"   onclick="editfunction(this)"   > Edit</button> |
+                   <button class="Deletebtn" data-id="@item.ProductId" onclick="DeleteFunction(this)" > Delete</button>
+                  </td>
+            </tr>
+        }
+
+    </table>
+</div>
+<div id="Createcontainer">
+
+</div>
+
+ 
+

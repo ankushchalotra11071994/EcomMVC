@@ -18,7 +18,7 @@ namespace Ecom.Entities
         public string Description { get; set; }
         public int thumbnailid { get; set; }
          public int Categoryid { get; set; }
-
+        
 
     }
 }

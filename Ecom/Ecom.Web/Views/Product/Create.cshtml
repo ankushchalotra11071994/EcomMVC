@@ -1,0 +1,33 @@
+﻿@model Ecom.Entities.Product
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+ 
+        
+       
+<h2>Create Products</h2>
+ 
+<form method="post"  class="form form-inline" id="Createform">
+    <p>
+        <label> Name</label>
+        <input name="Name" />
+        <label> Price</label>
+        <input name="Price" />
+        <label> Description</label>
+        <input name="Description" />
+        <label> CategoryId</label>
+        <input name="Categoryid" />
+        
+    </p>
+    <button class="success"  onclick="Createfunction()" type="button">SUBMIT</button>
+</form>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

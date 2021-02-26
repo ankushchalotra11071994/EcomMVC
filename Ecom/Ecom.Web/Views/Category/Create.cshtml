@@ -5,10 +5,68 @@
 
 <h2>Create Category</h2>
 <a href="Index">Categories</a>
-<form  method="post" id="Createform">
-    <label> Name</label>
-    <input name="Name"  />
-    <label> Description</label>
-    <input name="Description"  />
-    <button class="success" type="submit" >SUBMIT</button>
+
+<form method="post" id="Createform" action="/Category/Create"  style=" display: inline-block">
+    <div class="form-group">
+        <label> Name</label>
+        <input class="form-control" name="Name" />
+    </div>
+    <div class="form-group">
+        <label> Description</label>
+        <input class="form-control" name="Description">
+    </div>
+    <div class="form-group">
+        <label> Upload Thumbnail</label>
+        <input type="hidden" id="Thumbnail" name="Thumbnail" />
+        <input class="form-control" id="imageUpload" name="Image" type="file" accept=".png, .jpg" /><img id="categoryImage"   style="height:100px" />
+     </div>
+    <button class="btn btn-primary" onclick="Createfunction()" id="createbtn" type="submit">SUBMIT</button>
 </form>
+<script>
+
+
+    $("#imageUpload").change(function () {
+		var element = this;
+		var formData = new FormData();
+		var totalFiles = element.files.length;
+		for (var i = 0; i < totalFiles; i++) {
+			var file = element.files[i];
+			formData.append("Photo", file);
+		}
+		$.ajax({
+			type: 'POST',
+			url: '@Url.Action("UploadImage", "Shared")',
+			dataType: 'json',
+			data: formData,
+			contentType: false,
+			processData: false
+		})
+        .done(function (response) {
+        	console.log(response);
+        	if(response.Success)
+        	{
+                $("#Thumbnail").val(response.ImageURL);
+         	$("#categoryImage").attr("src", response.ImageURL);
+        	}
+        })
+        .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+        	alert("FAIL");
+        });
+	});
+
+    //function Createfunction() {
+    //    $.ajax({
+    //        method: "Post",
+    //        url: '/Category/Create',
+    //        data: $("#Createform").serialize()
+    //    }).done(function (Responce) {
+    //        RedirectToAction("Index");
+    //       })
+    //        .fail(function (XMLHttprequest, teststatus, errorThrown) {
+    //            alert('Fail');
+    //        })
+    //}
+
+
+</script>
+ 

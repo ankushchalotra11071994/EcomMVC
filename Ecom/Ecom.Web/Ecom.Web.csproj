@@ -129,6 +129,7 @@
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -454,7 +455,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Category\Create.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
-    <Content Include="Views\Category\Inde.cshtml" />
     <Content Include="Views\Category\Edit.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Product\ProductList.cshtml" />
@@ -463,6 +463,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\AppImages\" />
     <Folder Include="Content\images\about\" />
     <Folder Include="Models\" />
   </ItemGroup>

@@ -85,9 +85,9 @@ namespace Ecom.Services
   }
         public bool DeleteProductid ( int id)
         {
-            Product categoryobj = ecom.Products.ToList()
-               .Where(x => x.ProductId == id).FirstOrDefault();
-           var check= ecom.Products.Remove(categoryobj);
+            Category categoryobj = ecom.Categories.ToList()
+               .Where(x => x.categoryId == id).FirstOrDefault();
+           var check= ecom.Categories.Remove(categoryobj);
             ecom.SaveChanges();
             return true;
         }
